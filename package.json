@@ -1,0 +1,26 @@
+{
+  "name": "sqpaymentform-nodejs-starterkit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "grunt-contrib-uglify-es": "^3.3.0",
+    "grunt-hogan": "^0.3.1",
+    "grunt-jsbeautifier": "^0.2.13",
+    "grunt-processhtml": "^0.4.2",
+    "grunt-shell": "^3.0.1",
+    "grunt-uncss": "^0.9.1",
+    "hogan": "^1.0.2",
+    "nodemon": "^1.19.4"
+  }
+}

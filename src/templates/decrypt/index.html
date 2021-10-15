@@ -1,0 +1,31 @@
+<div class="row py-lg-3 text-center ">
+	<div class="col-lg-6 col-md-8 mx-auto">
+		<h1 class="fw-light">DATA DECRYPTION</h1>
+		<p class="lead text-muted">Provide your *PRIVATE KEY*, the *ENCRYPTED FILE KEY*, and the *ENCRYPTED FILE*.</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6 col-md-8 mx-auto pt-lg-5 pb-lg-3" >
+		<div id="decrypt-form">
+			<div class="mb-3">
+				<label for="privatekey" class="form-label">Private Key</label>
+				<input type="file" class="form-control" id="privatekey" aria-describedby="publickeyHelp">
+				<div id="privatekeyHelp" class="form-text">Your PRIVATE Key Goes Here</div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="filekey" class="form-label">File Key</label>
+				<input type="file" class="form-control" id="filekey" aria-describedby="filekeyHelp">
+				<div id="filekeyHelp" class="form-text">Your FILE Key Goes Here</div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="encryptedfile" class="form-label">Encrypted File</label>
+				<input type="file" class="form-control" id="encryptedfile">
+				<div id="encryptedfileHelp" class="form-text">This is What You're DECRYPTING</div>
+			</div>
+			
+			<a onclick="decrypt()" class="btn btn-primary">DECRYPT</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>teleporter</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- build:css ./tidy.css -->
+        <link rel="stylesheet" type="text/css" href="./css/output.big.css">
+        <!-- /build -->
+
+        <meta name="description" content="teleporter">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <style>
+            .nav-link{
+                border: solid 2px;
+                border-radius: 10px;
+            }
+
+            .modal-header{
+                padding: none;
+            }
+        </style>
+
+</head>
+
+<body>
+
+
+        <header>
+            <div class="navbar navbar-dark bg-dark shadow-sm">
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <strong>encrypt. transfer.</strong>
+                    </a>
+                    <button 
+                        class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarHeader" 
+                        aria-controls="navbarHeader" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT OF THE PAGE -->
+        <main>
+
+
+            <!-- TABS SECTION -->
+            <section class="py-5 container">
+                
+
+                <div class="row">
+                
+                    <!-- NAV COLUMN -->
+                    <div class="col-md-2 text-center ">
+                        <ul class="nav flex-column" id="myTab" role="tablist">
+                        
+                          <li class="nav-item py-2" role="presentation">
+                            <a 
+                                class="nav-link active" 
+                                id="home-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#home" 
+                                role="button" 
+                                aria-controls="home" 
+                                aria-selected="true">Home</a>
+                          </li>
+                        
+                          <li class="nav-item py-2" role="presentation">
+                            <a 
+                                class="nav-link" 
+                                id="genkeys-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#genkeys" 
+                                role="button" 
+                                aria-controls="genkeys" 
+                                aria-selected="false">Generate Keys</a>
+                          </li>
+                          
+                          <li class="nav-item py-2" role="presentation">
+                            <a 
+                                class="nav-link" 
+                                id="encrypt-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#encrypt" 
+                                role="button" 
+                                aria-controls="encrypt" 
+                                aria-selected="false">Encrypt</a>
+                          </li>
+                          
+                          <li class="nav-item py-2" role="presentation">
+                            <a 
+                                class="nav-link" 
+                                id="decrypt-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#decrypt" 
+                                role="button" 
+                                aria-controls="decrypt" 
+                                aria-selected="false">Decrypt</a>
+                          </li>
+                          
+                          <li class="nav-item py-2" role="presentation">
+                            <a 
+                                class="nav-link" 
+                                id="transfer-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#transfer" 
+                                role="button" 
+                                aria-controls="transfer" 
+                                aria-selected="false">Transfer</a>
+                          </li>
+                          
+                        </ul>
+                    </div>
+                    <!-- /// /// /// NAV COLUMN -->
+                    
+                    <!-- NAV CONTENT -->
+                    <div class="tab-content col-md-10">
+                    
+                        <!-- HOME TAB -->
+                        <div class="tab-pane fade show active text-center " id="home" role="tabpanel" aria-labelledby="home-tab"></div>
+
+                        <!-- KEY GEN TAB -->
+                        <div class="tab-pane fade show text-center " id="genkeys" role="tabpanel" aria-labelledby="genkeys-tab"></div>
+
+                        <!-- ENCRYPTION TAB -->
+                        <div class="tab-pane fade" id="encrypt" role="tabpanel" aria-labelledby="encrypt-tab"></div>
+                        
+                        <!-- DE-CRYPTION TAB -->
+                        <div class="tab-pane fade" id="decrypt" role="tabpanel" aria-labelledby="decrypt-tab"></div>
+						
+                    </div>
+                </div>
+                <!-- /// /// /// NAV CONTENT -->
+            </section>
+        </main>
+    </body>
+
+    <div class="modal fade" id="the_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+    <script src="./output.big.js" rel="preconnect"></script>
+
+    <script>
+
+    //
+    // Lazy method to test what environment we're in, and what variables we should use...
+    //
+    if(/\:\/\/(amazonaws|localhost|dev\.)/.test(window.location.href)){
+        window.env = "dev";
+    } else {
+        window.env = "prod";
+    }
+    
+
+    window.ui = new UserInterface();
+	window.ui.render();
+    
+
+
+
+    // GLOBAL FUNCTION TO FIRE OFF THE MODAL!
+    //
+    // GIVE ME AN OBJECT WITH 2 ATTRS:
+    // 1. HEADER - PLAIN TEXT
+    // 2. BODY - HTML OR TEXT...DON'T CARE
+    function show_modal(){
+        $("#the_modal").modal();
+    }
+    </script>
+</html>

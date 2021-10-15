@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist_games/
+src/build/*.html
+src/build/*.js
+src/build/*.css
+src/build/*.map
+src/css/output.big.css
+src/js/dev/dev/brother.js
+DEV.bat
+PROD.bat
