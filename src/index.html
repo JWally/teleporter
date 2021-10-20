@@ -1,38 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-        <title>teleporter</title>
+
+    <head>
+        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- build:css ./tidy.css -->
-        <link rel="stylesheet" type="text/css" href="./css/output.big.css">
-        <!-- /build -->
-
-        <meta name="description" content="teleporter">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
         <style>
             .nav-link{
                 border: solid 2px;
                 border-radius: 10px;
             }
-
-            .modal-header{
-                padding: none;
-            }
         </style>
+    
+    
+    </head>
 
-</head>
-
-<body>
+    <body>
 
 
         <header>
             <div class="navbar navbar-dark bg-dark shadow-sm">
                 <div class="container">
                     <a href="#" class="navbar-brand d-flex align-items-center">
-                        <strong>encrypt. transfer.</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="20" 
+                            height="20" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            aria-hidden="true" 
+                            class="me-2" 
+                            viewBox="0 0 24 24">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+                        </svg>
+                        <strong>encrypt.transfer.repeat</strong>
                     </a>
                     <button 
                         class="navbar-toggler" 
@@ -42,7 +47,7 @@
                         aria-controls="navbarHeader" 
                         aria-expanded="false" 
                         aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        
                     </button>
                 </div>
             </div>
@@ -63,58 +68,47 @@
                         <ul class="nav flex-column" id="myTab" role="tablist">
                         
                           <li class="nav-item py-2" role="presentation">
-                            <a 
+                            <a role="button"
                                 class="nav-link active" 
                                 id="home-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#home" 
-                                role="button" 
+                                role="tab" 
                                 aria-controls="home" 
                                 aria-selected="true">Home</a>
                           </li>
                         
                           <li class="nav-item py-2" role="presentation">
-                            <a 
+                            <a role="button"
                                 class="nav-link" 
                                 id="genkeys-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#genkeys" 
-                                role="button" 
+                                role="tab" 
                                 aria-controls="genkeys" 
                                 aria-selected="false">Generate Keys</a>
                           </li>
                           
                           <li class="nav-item py-2" role="presentation">
-                            <a 
+                            <a role="button"
                                 class="nav-link" 
                                 id="encrypt-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#encrypt" 
-                                role="button" 
+                                role="tab" 
                                 aria-controls="encrypt" 
                                 aria-selected="false">Encrypt</a>
                           </li>
                           
                           <li class="nav-item py-2" role="presentation">
-                            <a 
+                            <a role="button"
                                 class="nav-link" 
                                 id="decrypt-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#decrypt" 
-                                role="button" 
+                                role="tab" 
                                 aria-controls="decrypt" 
                                 aria-selected="false">Decrypt</a>
-                          </li>
-                          
-                          <li class="nav-item py-2" role="presentation">
-                            <a 
-                                class="nav-link" 
-                                id="transfer-tab" 
-                                data-bs-toggle="tab" 
-                                data-bs-target="#transfer" 
-                                role="button" 
-                                aria-controls="transfer" 
-                                aria-selected="false">Transfer</a>
                           </li>
                           
                         </ul>
@@ -125,52 +119,180 @@
                     <div class="tab-content col-md-10">
                     
                         <!-- HOME TAB -->
-                        <div class="tab-pane fade show active text-center " id="home" role="tabpanel" aria-labelledby="home-tab"></div>
+                        <div class="tab-pane fade show active text-center " id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row py-lg-5">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">Encrypt. Transfer. Repeat.</h1>
+                                    <p class="lead text-muted">Securely Encrypt and Transfer documents <strong>WITHOUT</strong> touching a Third-Party-Server.</p>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- KEY GEN TAB -->
-                        <div class="tab-pane fade show text-center " id="genkeys" role="tabpanel" aria-labelledby="genkeys-tab"></div>
+                        <div class="tab-pane fade show text-center " id="genkeys" role="tabpanel" aria-labelledby="genkeys-tab">
+                            <div class="row py-lg-5">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">Key Generation</h1>
+                                    <p class="lead text-muted">Click Below to generate an RSA Key Pair...</p>
+                                    <a onclick="EzCrypto.createKeys()" class="btn btn-large" role="button">GENERATE</a>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- ENCRYPTION TAB -->
-                        <div class="tab-pane fade" id="encrypt" role="tabpanel" aria-labelledby="encrypt-tab"></div>
+                        <div class="tab-pane fade" id="encrypt" role="tabpanel" aria-labelledby="encrypt-tab">
+                            <div class="row py-lg-3 text-center ">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">Data Encryption</h1>
+                                    <p class="lead text-muted">Provide your *PUBLIC KEY* and the *FILE* you want to encrypt.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-8 mx-auto pt-lg-5 pb-lg-3" >
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="publickey" class="form-label">Public Key</label>
+                                            <input type="file" class="form-control" id="publickey" aria-describedby="publickeyHelp">
+                                            <div id="publickeyHelp" class="form-text">Your Public Key Goes Here</div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="rawfile" class="form-label">Your File</label>
+                                            <input type="file" class="form-control" id="rawfile">
+                                            <div id="rawfileHelp" class="form-text">This is What You're Encrypting</div>
+                                        </div>
+                                        
+                                        <a onclick="encrypt()" class="btn btn-primary">Encrypt</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
                         
                         <!-- DE-CRYPTION TAB -->
-                        <div class="tab-pane fade" id="decrypt" role="tabpanel" aria-labelledby="decrypt-tab"></div>
-						
+                        <div class="tab-pane fade" id="decrypt" role="tabpanel" aria-labelledby="decrypt-tab">
+                            <div class="row py-lg-3 text-center ">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">DATA DECRYPTION</h1>
+                                    <p class="lead text-muted">Provide your *PRIVATE KEY*, the *ENCRYPTED FILE KEY*, and the *ENCRYPTED FILE*.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-8 mx-auto pt-lg-5 pb-lg-3" >
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="privatekey" class="form-label">Private Key</label>
+                                            <input type="file" class="form-control" id="privatekey" aria-describedby="publickeyHelp">
+                                            <div id="privatekeyHelp" class="form-text">Your PRIVATE Key Goes Here</div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="filekey" class="form-label">File Key</label>
+                                            <input type="file" class="form-control" id="filekey" aria-describedby="filekeyHelp">
+                                            <div id="filekeyHelp" class="form-text">Your FILE Key Goes Here</div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="encryptedfile" class="form-label">Encrypted File</label>
+                                            <input type="file" class="form-control" id="encryptedfile">
+                                            <div id="encryptedfileHelp" class="form-text">This is What You're DECRYPTING</div>
+                                        </div>
+                                        
+                                        <a onclick="decrypt()" class="btn btn-primary">DECRYPT</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /// /// /// NAV CONTENT -->
             </section>
         </main>
     </body>
-
-    <div class="modal fade" id="the_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
-    <script src="./output.big.js" rel="preconnect"></script>
-
-    <script>
-
-    //
-    // Lazy method to test what environment we're in, and what variables we should use...
-    //
-    if(/\:\/\/(amazonaws|localhost|dev\.)/.test(window.location.href)){
-        window.env = "dev";
-    } else {
-        window.env = "prod";
-    }
-    
-
-    window.ui = new UserInterface();
-	window.ui.render();
-    
-
-
-
-    // GLOBAL FUNCTION TO FIRE OFF THE MODAL!
-    //
-    // GIVE ME AN OBJECT WITH 2 ATTRS:
-    // 1. HEADER - PLAIN TEXT
-    // 2. BODY - HTML OR TEXT...DON'T CARE
-    function show_modal(){
-        $("#the_modal").modal();
-    }
-    </script>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="./output.big.js"></script>
+<script>
+    
+    // ********************************
+    // UTITLITY TO READ FILE AS A PROMISE
+    // ********************************
+    function readFile(file, type = "buffer"){
+        return new Promise((res, rej) => {
+            const fr = new FileReader();
+            fr.onerror = rej;
+            
+            fr.onloadend = function() {
+                console.log("LOAD END");
+                console.log(fr);
+                res(fr.result);
+            }
+            
+            
+            if(type == "text"){
+                fr.readAsText(file);
+            } else if(type == "binary"){
+                fr.readAsBinaryString(file);
+            } else if(type == "buffer"){
+                fr.readAsArrayBuffer(file)
+            }
+        });
+    }
+
+    // ********************************
+    // ENCRYPT SCRIPT
+    // ********************************
+    function encrypt(){
+
+        var file_pk = document.querySelector("#publickey").files["0"];
+
+        var file_raw = document.querySelector("#rawfile").files["0"];
+        
+        var obj = {};
+
+        readFile(file_pk)
+            .then((pk) => {
+                obj.pk = pk;
+                return readFile(file_raw);
+            })
+            .then((raw) => {
+                EzCrypto.encrypt(raw, obj.pk, file_raw.name);
+            })
+    }
+    
+    
+    // ********************************
+    // DECRYPT SCRIPT
+    // ********************************
+    function decrypt(){
+
+        var file_pk = document.querySelector("#privatekey").files["0"];
+
+        var file_filekey = document.querySelector("#filekey").files["0"];
+        
+        var file_encrypted = document.querySelector("#encryptedfile").files["0"];
+        
+        var obj = {};
+
+        readFile(file_pk)
+            // Load the private Key
+            .then((pk) => {
+                obj.pk = pk;
+                return readFile(file_filekey);
+            })
+            // Load the file key
+            .then((fk) => {
+                obj.fk = fk;
+                return readFile(file_encrypted);
+            })
+            // Load the encrypted file
+            .then((crypt) => {
+            
+                EzCrypto.decrypt(obj.pk, obj.fk, crypt, file_encrypted.name);
+            })
+    }
+    
+
+
+</script>

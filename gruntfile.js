@@ -5,45 +5,10 @@ var fs = require("fs");
 module.exports = function(grunt){
     grunt.initConfig({
         "pkg": "package.json",
-        "jshint": {
-            "prod": {
-                "files": ["src/**/*.js"]
-            },
-            "dev": {
-                "files": ["src/**/*.js"]
-            }
-        },
-        "jsbeautifier" : {
-            "dev": {
-                "src": ["src/**/*.js"]
-            },
-            "prod": {
-                "src": ["src/**/*.js"]
-            },
-            "options": {
-                "js": {
-                    "e4x": false,
-                    "eval_code": false,
-                    "indent_char": " ",
-                    "indent_level": 0,
-                    "indent_size": 4,
-                    "indent_with_tabs": false,
-                    "jslint_happy": true,
-                    "keep_array_indentation": true,
-                    "keep_function_indentation": false,
-                    "max_preserve_newlines": 10,
-                    "preserve_newlines": true,
-                    "space_before_conditional": true,
-                    "space_in_paren": false,
-                    "unescape_strings": false,
-                    "wrap_line_length": 0
-                }
-            }
-        },
         "hogan" : {
             "mytarget": {
                 "src": "src/templates/**/*.html",
-                "dest": "src/js/dev/dev/brother.js",
+                "dest": "src/js/brother.js",
                 "options": {
                     "binderName": "hulk",
                     "nameFunc": function (fileName) {
@@ -61,24 +26,15 @@ module.exports = function(grunt){
             "prod": {
                 "options": {
                     "sourceMap": true,
-                    "beautify": false
-                },
-                "files": {
-                    "src/build/output.big.js": [
-                        "src/js/dev/lib/**/*.js",
-                        "src/js/dev/dev/**/*.js"
-                    ]
-                }
-            },
-            "dev": {
-                "options": {
-                    "sourceMap": true,
                     "beautify": true
                 },
                 "files": {
                     "src/build/output.big.js": [
-                        "src/js/dev/lib/**/*.js",
-                        "src/js/dev/dev/**/*.js"
+                        "src/js/lib/**/*.js",
+                        "src/js/helpers/**/*.js",
+                        "src/js/parts/**/*.js",
+                        "src/js/ui/**/*.js",
+                        "src/js/brother.js"
                     ]
                 }
             }
@@ -88,51 +44,10 @@ module.exports = function(grunt){
             "files": {
               "./src/css/output.big.css": ["./src/css/dev/*.css"]
             }
-          },
-          "dev": {
-            "files": {
-              "./src/css/output.big.css": ["./src/css/dev/*.css"]
-            }
           }
-        },
-        "uncss": {
-            "prod": {
-                "options": {
-                    "ignore": [
-                        ".sq-input--focus",
-                        ".sq-input--error",
-                        ".sq-input---error",
-                        ".sq-input---error > input",
-                        ".sq-input---error > span"
-                    ],
-                    "ignoreSheets" : [/fonts.googleapis/]
-                },
-                "files": {
-                    "./src/build/tidy.css": ["./src/index.html"]
-                }
-            },
-            "dev": {
-                "options": {
-                    "ignore": [
-                        ".sq-input--focus",
-                        ".sq-input--error",
-                        ".sq-input---error",
-                        ".sq-input---error > input",
-                        ".sq-input---error > span"
-                    ]
-                },
-                "files": {
-                    "./src/build/tidy.css": ["./src/index.html"]
-                }
-            }
         },
         "processhtml": {
             "prod": {
-                "files": {
-                    "src/build/index.html": ["src/index.html"]
-                }
-            },
-            "dev": {
                 "files": {
                     "src/build/index.html": ["src/index.html"]
                 }
@@ -193,30 +108,16 @@ module.exports = function(grunt){
 
     grunt.loadNpmTasks("grunt-hogan");
     grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-jsbeautifier");
-    grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-uncss");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-processhtml");
 
 
 
-    grunt.registerTask("dev", [
-        "jsbeautifier:prod",
-        "hogan:mytarget",
-        "uglify:dev",
-        "cssmin:prod",
-//        "uncss:prod",
-        "processhtml:prod",
-        "summer_lean"
-    ]);
 
     grunt.registerTask("prod", [
-        "jsbeautifier:prod",
         "hogan:mytarget",
         "uglify:prod",
         "cssmin:prod",
-//        "uncss:prod",
         "processhtml:prod",
         "summer_lean"
     ]);
