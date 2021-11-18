@@ -85,28 +85,31 @@ class EzCrypto {
 // CREATE PUBLIC AND PRIVATE KEYS - RSA
 // ......................................
 // ......................................
+//
+// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey
+//
     static createKeys(){
     
         console.log("creating keys");
-    
+		
+		let keyType = "jwk";
         let that = this;
     
-        window.crypto.subtle.generateKey({
-                "name": "RSA-OAEP","modulusLength": 4096,"publicExponent": new Uint8Array([1, 0, 1]),
-                "hash": "SHA-256",
+        return window.crypto.subtle.generateKey({
+                "name": "RSA-OAEP",
+				"modulusLength": 4096,
+				"publicExponent": new Uint8Array([1, 0, 1]),
+                "hash": "SHA-256"
             },
-            true,
-            ["encrypt", "decrypt"]
+            true,["encrypt", "decrypt"]
         ).then((keyPair) => {
-            // Private Key
-            window.crypto.subtle.exportKey("jwk",keyPair.privateKey)
-                .then((x) => {that.forceDownload("key.private.json",JSON.stringify(x));});
-            // Public Key
-            window.crypto.subtle.exportKey("jwk",keyPair.publicKey)
-                .then((x) => {
-                    that.forceDownload("key.public.json",JSON.stringify(x));
-                });
-        });
+			return keyPair;
+        })
+		.catch((e) => {
+			console.log(e);
+			
+			return e;
+		});
     }
     
 // ......................................
@@ -305,6 +308,16 @@ class EzCrypto {
         })
     }
 
+
+// ......................................
+// ......................................
+// ENCRYPT A BUFFER...
+// ......................................
+// ......................................
+	static encryptBuffer(publicKey, buffer){
+		
+		
+	}
 
 
 

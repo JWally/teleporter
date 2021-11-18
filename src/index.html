@@ -110,6 +110,17 @@
                                 aria-controls="decrypt" 
                                 aria-selected="false">Decrypt</a>
                           </li>
+						  
+                          <li class="nav-item py-2" role="presentation">
+                            <a role="button"
+                                class="nav-link" 
+                                id="trx-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#trx" 
+                                role="tab" 
+                                aria-controls="trx" 
+                                aria-selected="false">Transfer</a>
+                          </li>
                           
                         </ul>
                     </div>
@@ -203,6 +214,35 @@
                                 </div>
                             </div>
                         </div>
+						
+						
+						
+						
+                        
+                        <!-- FILE TRANSFER TAB -->
+                        <div class="tab-pane fade" id="trx" role="tabpanel" aria-labelledby="trx-tab">
+                            <div class="row py-lg-3 text-center ">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">FILE TRANSFER</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-8 mx-auto pt-lg-5 pb-lg-3" >
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="trx-file" class="form-label">Transfer File</label>
+                                            <input type="file" class="form-control" id="trx-file" aria-describedby="publickeyHelp">
+                                            <div id="privatekeyHelp" class="form-text">This is the file you're shipping</div>
+                                        </div>
+                                        
+                                        <a onclick="transfer()" class="btn btn-primary">TRANSFER</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						
                     </div>
                 </div>
                 <!-- /// /// /// NAV CONTENT -->
@@ -293,6 +333,13 @@
             })
     }
     
-
+    // ********************************
+    // TRANSFER SCRIPT
+    // ********************************
+    function transfer(){
+		readFile(document.querySelector("#trx-file").files[0]).then((d) => {
+			wh.chat(d);
+		})
+	}
 
 </script>
