@@ -18,16 +18,6 @@ What do we need to be able to do?
 
 
 
-
-
-
-
-
-
-
-
-
-
 class SimpleCrypto extends FileUtils{
 	
 	
@@ -40,7 +30,7 @@ class SimpleCrypto extends FileUtils{
 //
 // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey
 //
-    createKeys(){
+    static RSA_createKeys(){
     
         console.log("creating keys");
    
@@ -68,7 +58,7 @@ class SimpleCrypto extends FileUtils{
 // ......................................
 // ......................................
 //
-	keyToBuffer(key, keyType){
+	static RSA_keyToBuffer(key, keyType){
 		
 		if(keyType === "public"){
 			return window.crypto.subtle.exportKey("spki",key);
@@ -89,7 +79,7 @@ class SimpleCrypto extends FileUtils{
 // ......................................
 // ......................................
 //
-	bufferToKey(key, keyType){
+	static RSA_bufferToKey(key, keyType){
 
 		
 		if(keyType === "public"){
@@ -111,7 +101,7 @@ class SimpleCrypto extends FileUtils{
 // ......................................
 // ......................................
 //
-	keyBufferToText(buf, keyType){
+	static RSA_keyBufferToText(buf, keyType){
 		
 		return new Promise((s,j) => {
 			if(keyType !== "public" && keyType !== "private"){
@@ -140,7 +130,7 @@ class SimpleCrypto extends FileUtils{
 // ......................................
 // ......................................
 //
-	textToKeyBuffer(txt, keyType){
+	static RSA_textToKeyBuffer(txt, keyType){
 		
 		
 		//
@@ -168,74 +158,13 @@ class SimpleCrypto extends FileUtils{
 		});
 	}
 	
-// ......................................
-// ......................................
-// CREATE AND DOWNLOAD KEYS
-// ......................................
-// ......................................
-	keysToFiles(){
-		var that = this;
-		var retKeys = {};
-		
-		return that.createKeys().then((keys) => {
-			//
-			// Store the keys AS keys here
-			// and pass them out of this promise chain
-			// so we can use them if we want to later
-			//
-			retKeys = keys;
-			
-			return Promise.all([
-				that.keyToBuffer(keys.privateKey,"private"),
-				that.keyToBuffer(keys.publicKey, "public")
-			])
-		})
-		.then((d) => {
-			return Promise.all([
-				that.keyBufferToText(d[0],"private"),
-				that.keyBufferToText(d[1],"public")
-			]);
-		})
-		.then((d) => {
-			return Promise.all([
-				that.dataToFile("private.pem",d[0]),
-				that.dataToFile("public.pem",d[1])
-			]);
-		})
-		.then((d) => {
-			return new Promise((s,j) => {
-				return s(retKeys);
-			})
-		})
-	}
-	
-	
-// ......................................
-// ......................................
-// LOAD A KEY FROM A TEXT FILE
-// ......................................
-// ......................................
-	keyFromTextFile(keyType){
-		var that = this;
-		
-		return that.fileToBuffer()
-			.then((b) => {
-				console.log(0,b);
-				return that.textToKeyBuffer(b,keyType);
-			})
-			.then((b) => {
-				console.log(1,b);
-				return that.bufferToKey(b, keyType);
-			})
-		
-	}
 
 // ......................................
 // ......................................
 // ENCRYPTION - KISS
 // ......................................
 // ......................................
-	encrypt(publicKey, ary_buf){
+	static RSA_encrypt(publicKey, ary_buf){
 		return window.crypto.subtle.encrypt("RSA-OAEP", publicKey, ary_buf);
 	}
 	
@@ -244,9 +173,32 @@ class SimpleCrypto extends FileUtils{
 // DECRYPTION - KISS
 // ......................................
 // ......................................
-	decrypt(privateKey, ary_buf){
+	static RSA_decrypt(privateKey, ary_buf){
 		return window.crypto.subtle.decrypt("RSA-OAEP", privateKey, ary_buf);
 	}
+	
+	
+	
+	
+// ............................................................................
+// ............................................................................
+// ---------------------------- AES FUNCTIONS ---------------------------------
+// ............................................................................
+// ............................................................................
+	
+	static AES_createKey(){
+		
+		return window.crypto.subtle.generateKey({
+				"name": "AES-CTR",
+				"iv": crypto.getRandomValues(new Uint8Array(512)),
+				"length": 256
+			},
+			true,
+			["encrypt","decrypt"]
+		)
+	}
+	
+	
 	
 	
 }

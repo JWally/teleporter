@@ -19,10 +19,9 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 
 
-const app = express();
-const port = 80;
-
-
+var https = require("https");
+var http = require("http");
+var app = express();
 
 //
 // All of this is pre-amble for express
@@ -125,8 +124,16 @@ app.use(function(req,res,next){
 
 
 
-
+/*
 app.listen(
   port,
   () => console.log(`listening on - http://localhost:${port} - ${new Date()}`)
 );
+*/
+var fs = require("fs");
+let sslOptions = {
+   key: fs.readFileSync('localhost.key'),
+   cert: fs.readFileSync('localhost.crt')
+};
+http.createServer(app).listen(80)
+https.createServer(sslOptions,app).listen(443)

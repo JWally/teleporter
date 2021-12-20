@@ -58,8 +58,9 @@ class Socket extends SimpleEvents{
     // ////////////////////////////////
     //
     // ////////////////////////////////
-    send(dataType, data){
-		this.#socket.send(JSON.stringify({"action": "x-message", "type": dataType, "body": data, "to": this.peerId}));
+    send(dataType, data, peerId = false){
+		if(!peerId){peerId = this.peerId;}
+		this.#socket.send(JSON.stringify({"action": "x-message", "type": dataType, "body": data, "to": peerId}));
 	}
 	
     // ////////////////////////////////

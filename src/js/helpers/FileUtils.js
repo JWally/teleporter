@@ -148,8 +148,8 @@ class FileUtils{
     // ********************************
     // ONE STOP SHOP - GZIP FILE AND SAVE
     // ********************************
-	fileToFileGzip(){
-		
+	async fileToFileGzip(){
+		/*
 		var inFile,
 			outFile;
 		
@@ -216,7 +216,42 @@ class FileUtils{
 			
 			loop();
 		})
+		*/
+		
 			
+			var inFile;
+			var outFile;
+			
+			inFile = await showOpenFilePicker().then((f) => {return f[0].getFile()}).then((f) => {
+				return f.stream();
+			});
+			
+			
+			outFile = await showSaveFilePicker().then((d) => {return d.createWritable()});
+			
+			
+			return await inFile.pipeThrough(new CompressionStream('gzip')).pipeTo(outFile);
+			
+		
+	}
+	
+	
+	
+	
+	async fileToFileGunzip(){
+		
+			var inFile;
+			var outFile;
+			
+			inFile = await showOpenFilePicker().then((f) => {return f[0].getFile()}).then((f) => {
+				return f.stream();
+			});
+			
+			
+			outFile = await showSaveFilePicker().then((d) => {return d.createWritable()});
+			
+			
+			return await inFile.pipeThrough(new DecompressionStream('gzip')).pipeTo(outFile);
 	}
 	
 	
