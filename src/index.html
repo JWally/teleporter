@@ -121,6 +121,17 @@
                                 aria-controls="trx" 
                                 aria-selected="false">Transfer</a>
                           </li>
+						  
+                          <li class="nav-item py-2" role="presentation">
+                            <a role="button"
+                                class="nav-link" 
+                                id="keyri-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#keyri" 
+                                role="tab" 
+                                aria-controls="keyri" 
+                                aria-selected="false">KeyRi - Unchained</a>
+                          </li>
                           
                         </ul>
                     </div>
@@ -241,7 +252,16 @@
                             </div>
                         </div>
 						
-						
+                        <!-- KEY RI TAB -->
+                        <div class="tab-pane fade show text-center " id="keyri" role="tabpanel" aria-labelledby="keyri-tab">
+                            <div class="row py-lg-5">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <h1 class="fw-light">KeyRi - UNCHAINED</h1>
+                                    <p class="lead text-muted">Click Below to test shit</p>
+                                    <a onclick="workBitch()" class="btn btn-large btn-primary" role="button">GENERATE</a>
+                                </div>
+                            </div>
+                        </div>
 						
                     </div>
                 </div>
@@ -340,6 +360,45 @@
 		readFile(document.querySelector("#trx-file").files[0]).then((d) => {
 			wh.chat(d);
 		})
+	}
+	
+	
+	// PROOF OF CONCEPT --- WORK BITCH!
+	function workBitch(){
+			
+		alert(":CLICKED");
+			
+		var wams = new WebAuthMServer();
+		var wam = new WebAuthM();
+
+		wams.get__AssertionOptions("justin@wolcott.io","justin wolcott",btoa("ASSHOLE"))
+			.then((publicKey) => {
+				console.log("01 - START => ", publicKey);
+				return wam.makeCredential(publicKey)
+			})
+			.then((clientOut) => {
+				console.log("02 - Client Out => ",clientOut, JSON.parse(clientOut.data))
+				return wams.post__MakeCredential(clientOut);
+			})
+			.then((data) => {
+				console.log("03 - ??? => ", data)
+				return wams.get__ExistingAssertionOptions("justin@wolcott.io","justin wolcott",btoa("ASSHOLE"));
+			})
+			.then((data) => {
+				console.log("04 - ??? => ",data);
+				that =  wam.getCredential(data);
+
+				return navigator.credentials.get(that);
+			})
+			.then((creds) => {
+				console.log("CREDS",creds)
+			})
+
+			.catch((e) => {
+				console.error(e)
+				alert(e);
+			})
+	
 	}
 
 </script>

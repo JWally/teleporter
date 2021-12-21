@@ -96,16 +96,17 @@ class WebAuthMServer extends DataHelpers{
 					"rp":{"name":"localhost","id":"localhost"},
 					"user":{"name":name,"displayName":displayName,"id":id},
 					"pubKeyCredParams":[
+						{"type":"public-key","alg":-259},
+						{"type":"public-key","alg":-258},
+						{"type":"public-key","alg":-257},
 						{"type":"public-key","alg":-7},
 						{"type":"public-key","alg":-35},
 						{"type":"public-key","alg":-36},
-						{"type":"public-key","alg":-257},
-						{"type":"public-key","alg":-258},
-						{"type":"public-key","alg":-259},
 						{"type":"public-key","alg":-37},
 						{"type":"public-key","alg":-38},
 						{"type":"public-key","alg":-39},
-						{"type":"public-key","alg":-8}],
+						{"type":"public-key","alg":-8}
+					],
 					"authenticatorSelection":{"requireResidentKey":false,"userVerification":"discouraged"},
 					"timeout":60000,
 					"extensions":{"txAuthSimple":""},
@@ -215,7 +216,7 @@ class WebAuthMServer extends DataHelpers{
 	//
 	// https://www.iana.org/assignments/cose/cose.xhtml#algorithms
 	//
-	parseAuthData(authData){
+	static parseAuthData(authData){
 		
 		
 	/*
